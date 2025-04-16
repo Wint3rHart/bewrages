@@ -1,4 +1,4 @@
-import React, { lazy, Suspense ,useEffect} from 'react'
+import React, { lazy, Suspense ,useEffect, useRef} from 'react'
 import { Route, Routes } from 'react-router'
 import Navbar from './Navbar';
 import usePost from './usePost';
@@ -12,13 +12,14 @@ let Sign=lazy(()=>{return import('./Sign')});
 let Order=lazy(()=>{return import('./Order')});
 let User=lazy(()=>{ return import("./User")});
 let Admin=lazy(()=>{return import('./Admin')});
+let Reviews=lazy(()=>{return import("./Reviews")});
 
 function MainRoutes() {
  console.log("maiin re rendered");
  
   let sign_fnx=useSignStore(state=>state.fnx.set_data);
   let sign_property=useSignStore(state=> state.data);
-
+let ref=useRef(null);
   let {query}=usePost("refresh");
   let login=useQuery({queryKey:["login"],queryFn:async()=>{ console.log(sign_property?"Status true":"Status false");
   ;let get=await fetch("http://localhost:4800/login",{credentials:'include'});if(!get.ok){let conv=await get.json();throw new Error(conv||'error in login')};return await get.json() },retry:false ,refetchOnWindowFocus:false,refetchInterval:false,enabled:sign_property.status?false:true});
@@ -28,25 +29,44 @@ function MainRoutes() {
   
   },[login.data,login.isError,login.isLoading]);
   
-  useEffect(()=>{ query.isSuccess&&login.refetch();query.isError&&console.log(login.error);
+  useEffect(()=>{ query.isSuccess&&login.refetch();query.isError&&console.log(query.error);
      },[query.isSuccess,query.isError]);
 
-useEffect(()=>{console.log(sign_property.name,sign_property.status);
-},[])
+useEffect(()=>{
+  
+if (login.isLoading) {
+  
+ref.current.style.transform="scaleY(1)";
+
+ref.current.innerText="Logging In";
+}
+else if(login.data||query.data){ref.current.innerText="Login Success";
+setTimeout(() => {
+  ref.current.style.transform="scaleY(0)";
+
+}, 1300);  }
+else if(query.error||login.isError){ref.current.innerText="Login Failed"; 
+setTimeout(() => {
+  ref.current.style.transform="scaleY(0)";
+
+}, 1300)
+ }
+},[login.data,login.error,login.isLoading,query.error,query.data])
 
   return (
     <div>
 
 <Navbar/>
+<div ref={ref} className={`border-3 flex  justify-center duration-1000 items-center text-white border-red-900 w-100 h-[100px]  mt-20 ml-10 origin-top `}>Loading </div>
 {<Suspense fallback={<p>Loading...</p>}>
 <Routes>
 
 <Route path='/select'  element={ <Select/> }/>
 <Route  path='/' element={<Home/> }  />
-<Route path='/cards' element={ <Cards/>}  />
+<Route path='/cards' element={ <Cards/>}  ><Route path='reviews' element={<Reviews/>}/></Route>
 <Route path='/sign' element={<Sign/>} />
 <Route path='/order' element={<Order/>} />
-<Route path='/user/:id'  element={<Suspense fallback={<p>Loading...</p>}> <User/> </Suspense>}/>
+<Route path='/user/:id'  element={<User/>}/>
 
 
 </Routes>
