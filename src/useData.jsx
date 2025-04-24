@@ -16,7 +16,7 @@ function useData(type, key) {
 
  let get = await fetch(
         
-      url,{credentials:"include"}); if (!get.ok) { let conv = await get.json(); throw new Error('error' ) }; return await get.json() },refetchOnWindowFocus:false,staleTime:90000,retry:false,refetchInterval:false })
+      url,{credentials:"include"}); if (!get.ok) { let conv = await get.json(); throw new Error('error'||conv ) }; return await get.json() },refetchOnWindowFocus:false,staleTime:90000,retry:false,refetchInterval:false })
 
 // V2kci-CL6SHsVogWgZX0GWwI4MI
 

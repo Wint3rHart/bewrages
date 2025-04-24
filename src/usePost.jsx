@@ -55,9 +55,11 @@ if(!get.ok){let conv=await get.json();throw new Error(conv||"error in comment po
 return await get.json();
 }
 
- },retry:false,onSuccess:(x)=>{switch(type){ case "sign" : sign(x.dets);break;
+ },retry:false,onSuccess:(x)=>{switch(type){
+   case "sign" : sign(x.dets);break;
    case "order":
    case "cancel" :client.invalidateQueries(["user"]);break;
+   case "comment":client.invalidateQueries(["comment"]);break;
    }
  },onError:(x)=>{
  }  })

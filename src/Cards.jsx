@@ -37,7 +37,7 @@ const memo=useMemo(()=>{return data&& data.map((x, i) => (
     key={i}
    
   >
-    <div  className={` ${rotate==i?"-scale-x-100":"scale-x-100"} ${rotate==i?"opacity-0":"opacity-100"}  flex flex-col relative border-2 border-white hover:border-gray-300 rounded-lg overflow-hidden shadow-lg transition-all duration-1000 group sm:w-[350px] h-[500px] bg-black/50 backdrop-blur-xs`}>
+    <div  className={` ${rotate==i?"-scale-x-100":"scale-x-100"} ${rotate==i?"opacity-0":"opacity-100"}  flex flex-col relative border-2 border-white hover:border-gray-300 rounded-lg overflow-hidden shadow-lg transition-all duration-1000 group sm:w-[400px] h-[500px] bg-black/50 backdrop-blur-xs`}>
     {/* Review Button */}
     <span className="absolute top-3 right-3 text-gray-200 hover:text-brown-400 cursor-pointer text-lg font-bold  z-3 transition-transform duration-1000">
       Reviews
@@ -73,7 +73,7 @@ const memo=useMemo(()=>{return data&& data.map((x, i) => (
     <div className="border-t-2 border-white w-0   transition-all duration-500 group-hover:w-2/3 mx-auto mt-4"></div>
   </div>
   
-   <div  className={`flex flex-col ${rotate==i?"scale-x-100":"-scale-x-100"} ${rotate==i?"z-1":"-z-1"} ${rotate==i?"opacity-100":"opacity-0"}   absolute top-0 border-2 -z-1 border-white hover:border-gray-300 rounded-lg overflow-hidden shadow-lg transition-all duration-1000  group sm:w-[400px] h-[480px] bg-black/50 backdrop-blur-sm`}><span onClick={()=>{setRotate(x=>x=null)}}>Back</span> <ul>{x.ingredients.map((y,i)=>{return <li className="text-white">{y}</li>})}</ul>  </div>    </div>
+   <div  className={`flex flex-col ${rotate==i?"scale-x-100":"-scale-x-100"} ${rotate==i?"z-1":"-z-1"} ${rotate==i?"opacity-100":"opacity-0"}   absolute top-0 border-2 -z-1 border-white hover:border-gray-300 rounded-lg overflow-hidden shadow-lg transition-all duration-1000  group sm:w-[400px] h-[500px] bg-black/50 backdrop-blur-sm`}><span onClick={()=>{setRotate(x=>x=null)}}>Back</span> <ul>{x.ingredients.map((y,i)=>{return <li className="text-white">{y}</li>})}</ul>  </div>    </div>
 ))},[data,rotate,reducer])
 
   return (
