@@ -1,22 +1,33 @@
-import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router'
 import useSignStore from './useSignStore';
+import useData from './useData';
+import {SearchContext} from './MainRoutes'
 
 function Navbar() {
 
-    let nav=useNavigate();
-    let role=useSignStore(x=> x.data.role);
-    let sign_id=useSignStore(state=> state.data.id);
-useEffect(()=>{console.log(role);
-})
+const {cards_fnx}=useContext(SearchContext);
 
-console.log('nav render');
+let titles= [{title:"Home",link:"/"},{title:"SignUp",link:"/sign"},{title:"About Us",link:"/aboutUs"},{title:"Store",link:"/select"}]
+ 
+let nav = useNavigate();
+    let role = useSignStore(x => x.data.role);
+    let sign_id = useSignStore(state => state.data.id);
+  let loc=useLocation();
+    
+
+    // console.log('nav render');
 
     return (
-        <div className=' '>
+        <div  className='flex justify-evenly mt-10'>
 
-            <ul className='list-none text-white absolute top-0 flex justify-evenly list-style-none h-20 items-center font-black text-2xl bg-transparent w-full left-0'><li onClick={()=>{nav("/")}}>Home</li><li onClick={()=>{nav("/sign")}}>signUp</li>
-            <li onClick={()=>{nav("/")}}>AboutUs</li><li onClick={()=>{nav("/select")}}>Store</li> <ul className=' group border-2 relative p-2'>Account <ul> <div className='border-1  transition-all duration-400 opacity-0 text-center group-hover:opacity-100 h-20 w-20 absolute left-3 top-12'><li  onClick={()=>{nav(`user/${encodeURIComponent(sign_id)}`)}}>User</li> </div> </ul> </ul> </ul>
+           {titles.map((x,i)=>{return <ul><li className='text-white font-black' onClick={()=>{nav(x.link)}}>{x.title}</li></ul>})}  
+            <div className='group text-white font-black relative'> Account
+           <div className='border-1  transition-all duration-400 opacity-0 text-center group-hover:opacity-100 h-20 w-20 absolute left-3 top-12'><li onClick={() => { nav(`user/${encodeURIComponent(sign_id)}`) }}>User</li> </div> 
+           </div>
+              <div><input className='border-2 text-white border-white rounded-lg' type='search' onChange={(e)=>{
+                cards_fnx(e.target.value,loc)}}/></div>  
+                  
         </div>
     )
 }

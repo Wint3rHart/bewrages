@@ -22,7 +22,7 @@ useEffect(()=>{data&&console.log(data,data.length);
 },[isLoading,data])
  
 
-useEffect(()=>{console.log(isError&&error);},[data,error])
+useEffect(()=>{console.log(isError&&error.message);},[data,error])
 
   return (
 

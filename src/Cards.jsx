@@ -1,7 +1,8 @@
-import React, { useCallback, useEffect,useMemo,useReducer,useRef,useState } from "react";
+import React, { createContext, useCallback, useContext, useEffect,useMemo,useReducer,useRef,useState } from "react";
 import useData from "./useData";
 import { Outlet, useLocation, useNavigate, useSearchParams } from "react-router";
 import { Blurhash } from "react-blurhash";
+import { SearchContext } from "./MainRoutes";
 
 const red_fnx=(state,action)=>{
 return {...state,[action.payload]:true}
@@ -10,25 +11,28 @@ return {...state,[action.payload]:true}
 
 
 function Cards() {
-  console.log('cards rendered');
- 
-const check=useCallback((x)=>{console.log(x);
-},[])
-let loc=useLocation(); console.log(loc);
+  
+  let context=useContext(SearchContext);
+  // console.log('cards rendered');
+
+
+let loc=useLocation(); 
 
   let [search, setSearch] = useSearchParams();
-  let { data, isLoading,error,isError} = useData(search.get("category"), "drinks");
+  let { data, isLoading,error,isError} = 
+  useData(search.get("category")!="custom"?search.get("category"):"search", search.get("category")!="custom"?"drinks":context.search);
+  //need to complete this useData for search feature
   let [rotate,setRotate]=useState();
   let [reducer,setReducer]=useReducer(red_fnx,{})
 let nav=useNavigate();
-  useEffect(() => {
-    data && console.log(data);
-  }, [data, isLoading]);
+
 
 useEffect(()=>{console.log("rotate",rotate);
 },[rotate])
-
-useEffect(()=>{ data&&data.forEach((x,i)=>{let image=new Image();image.src=x.images.image;image.onload=()=>{setReducer({payload:x.images.image});console.log('ready');
+useEffect(()=>{data&&console.log(data);
+},[data])
+useEffect(()=>{ data&&data.forEach((x,i)=>{let image=new Image();
+  image.src=x.images.image;image.onload=()=>{setReducer({payload:x.images.image});console.log('ready');
 }
 })  },[data])
 

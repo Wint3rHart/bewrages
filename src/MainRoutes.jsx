@@ -1,5 +1,5 @@
-import React, { lazy, Suspense ,useEffect, useRef} from 'react'
-import { Route, Routes } from 'react-router'
+import React, { createContext, lazy, Suspense ,useEffect, useRef, useState} from 'react'
+import { Route, Routes, useLocation, useNavigate } from 'react-router'
 import Navbar from './Navbar';
 import usePost from './usePost';
 import { useQuery } from '@tanstack/react-query';
@@ -13,10 +13,30 @@ let Order=lazy(()=>{return import('./Order')});
 let User=lazy(()=>{ return import("./User")});
 let Admin=lazy(()=>{return import('./Admin')});
 let Reviews=lazy(()=>{return import("./Reviews")});
+const SearchContext=createContext();
 
 function MainRoutes() {
- console.log("maiin re rendered");
- 
+  let[search,setSearch]=useState("");
+//  console.log("main re rendered");
+ let loc=useLocation();
+let nav=useNavigate();
+
+ const cards_fnx=(x,y)=>{
+console.log(y);
+
+setSearch((a)=>{return a=x });
+
+
+};
+
+
+
+useEffect(()=>{
+  if(search.length>0){nav("/cards?category=custom")}
+  else{nav(`/select`)}
+},[search]);
+
+
   let sign_fnx=useSignStore(state=>state.fnx.set_data);
   let sign_property=useSignStore(state=> state.data);
 let ref=useRef(null);
@@ -54,6 +74,7 @@ setTimeout(() => {
 },[login.data,login.error,login.isLoading,query.error,query.data])
 
   return (
+    <SearchContext.Provider value={{cards_fnx,search,setSearch}}>
     <div>
 
 <Navbar/>
@@ -74,7 +95,9 @@ setTimeout(() => {
 
         
     </div>
+    </SearchContext.Provider>
   )
 }
 
 export default MainRoutes
+export {SearchContext}
