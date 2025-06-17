@@ -13,7 +13,7 @@ return {...state,[action.payload]:true}
 function Cards() {
   
   let context=useContext(SearchContext);
-  // console.log('cards rendered');
+  console.log('cards rendered');
 
 
 let loc=useLocation(); 
@@ -43,9 +43,7 @@ const memo=useMemo(()=>{return data&& data.map((x, i) => (
   >
     <div  className={` ${rotate==i?"-scale-x-100":"scale-x-100"} ${rotate==i?"opacity-0":"opacity-100"}  flex flex-col relative border-2 border-white hover:border-gray-300 rounded-lg overflow-hidden shadow-lg transition-all duration-1000 group sm:w-[400px] h-[500px] bg-black/50 backdrop-blur-xs`}>
     {/* Review Button */}
-    <span className="absolute top-3 right-3 text-gray-200 hover:text-brown-400 cursor-pointer text-lg font-bold  z-3 transition-transform duration-1000">
-      Reviews
-    </span>
+    
 
     {/* Image */}
   {reducer[x.images.image]?  <img

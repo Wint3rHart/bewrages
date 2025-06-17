@@ -7,6 +7,8 @@ import usePost from "./usePost";
 import useSignStore from "./useSignStore";
 
 function App() {
+  console.log("select.app rendered");
+  
   let [rot, setRot] = useState(0);
  let {data,isLoading,isError,error}=useData('select');
 

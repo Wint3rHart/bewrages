@@ -13,10 +13,13 @@ function usePost(type,abort,param) {
 let sign=useSignStore(state=>state.fnx.set_data);
 
 let query =useMutation({mutationFn:async(data)=>{ 
-
-  let signal=abort_ref.current.signal
+ const abortController = new AbortController();
+ 
+    const signal = abortController.signal;abort_ref.current=abortController;
+  // let signal=abort_ref.current.signal
 setTimeout(() => {
-  abort_ref.current.abort("Taking too long")
+   abortController.abort("Taking too long ss");
+
 }, 10000);
 if(type=='register'){ 
     
