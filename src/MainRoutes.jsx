@@ -5,6 +5,7 @@ import usePost from './usePost';
 import { useQuery } from '@tanstack/react-query';
 import useSignStore from './useSignStore';
 import Registration from './Registration';
+import { AnimatePresence } from 'framer-motion';
 
 let Select=lazy(()=>{return import('./App')});
 let Home=lazy(()=>{return import('./Home')});
@@ -41,8 +42,11 @@ useEffect(()=>{
 
 
   
-const memo=useMemo(()=>{return <Suspense fallback={<p>Loading...</p>}><Registration/>
-<Routes>
+const memo=useMemo(()=>{console.log("yyyy");
+;return <Suspense fallback={<p>Loading...</p>}>
+<Registration/>
+{/* <AnimatePresence mode='wait'> */}
+<Routes  >
 
 <Route path='/select'  element={ <Select/> }/>
 <Route  path='/' element={<Home/> }  />
@@ -54,6 +58,7 @@ const memo=useMemo(()=>{return <Suspense fallback={<p>Loading...</p>}><Registrat
 
 
 </Routes>
+{/* </AnimatePresence> */}
 </Suspense>},);
 
   return (

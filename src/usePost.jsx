@@ -57,12 +57,19 @@ let get=await fetch(`http://localhost:4800/comment/${param}`,{method:"POST",head
 if(!get.ok){let conv=await get.json();throw new Error(conv||"error in comment post")};
 return await get.json();
 }
+else if(type=="acknowledge"){console.log(data,"dd");
+  let get=await fetch("http://localhost:4800/acknowledge",{method:"PUT",headers:{"Content-Type":"Application/json"},body:JSON.stringify(data)});
+  let conv=await get.json();
+  if(!conv){throw new Error(conv.msg||conv||"error in acknowledge")};
+  return conv;
+}
 
  },retry:false,onSuccess:(x)=>{switch(type){
    case "sign" : sign(x.dets);break;
    case "order":
-   case "cancel" :client.invalidateQueries(["user"]);break;
+   case "cancel" :client.invalidateQueries("user");break;
    case "comment":client.invalidateQueries(["comment"]);break;
+   case "acknowledge":client.invalidateQueries(["orders_data"]);
    }
  },onError:(x)=>{
  }  })

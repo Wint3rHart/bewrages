@@ -64,7 +64,7 @@ function Sign() {
         </h1>
 
         <span
-          className="text-gray-400 absolute top-5 cursor-pointer border border-purple-700 inline-block rounded-full p-3 hover:text-white hover:border-white transition-all"
+          className="text-gray-100 absolute top-75 m-auto cursor-pointer border border-yellow-700 inline-block rounded-full p-3 hover:text-white hover:border-white transition-all"
           onClick={() => {
             nav('/select');
           }}

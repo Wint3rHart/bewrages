@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
-body{  background-image: url("/Untitled-1 copy.jpg");background-repeat: no-repeat;background-position:center;background-size: cover;background-attachment: fixed;}
+body{  
+  /* background-image: url("/Untitled-1 copy.jpg");background-repeat: no-repeat;background-position:center;background-size: cover;background-attachment: fixed; */
+  background-color: #110700;
+}
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

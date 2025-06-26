@@ -20,11 +20,11 @@ let nav = useNavigate();
     console.log('nav render');
 
     return (
-        <div  className='flex justify-evenly mt-10'>
+        <div  className='flex justify-evenly mt-10 '>
 
            {titles.map((x,i)=>{return <ul><li className='text-white font-black' onClick={()=>{nav(x.link)}}>{x.title}</li></ul>})}  
             <div className='group text-white font-black relative'> Account
-           <div className='border-1  transition-all duration-400 opacity-0 text-center group-hover:opacity-100 h-20 p-5 absolute left-3 top-12'>{<p  onClick={() => {console.log(role);
+           <div className='border-1  transition-all duration-400 opacity-0 text-center group-hover:opacity-100 h-20 p-5 absolute left-3 top-12 z-2'>{<p  onClick={() => {console.log(role);
            ;role=="User"? nav(`user/${encodeURIComponent(id)}`):nav(`admin/${encodeURIComponent(id)}`) }}>{role=="User"?'User':"Admin"}</p>} </div> 
            </div>
               <div><input className='border-2 text-white border-white rounded-lg' type='search' onChange={(e)=>{
