@@ -76,7 +76,8 @@ console.log("app rendered");
   }
 
   return (
-    <div className="h-screen mt-20 flex flex-col justify-center items-center">
+    <div className="h-screen mt-20 flex flex-col justify-center items-center"  
+>
 
         <motion.div
           variants={parentVar}

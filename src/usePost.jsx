@@ -47,7 +47,12 @@ return await get.json();  }
 
 else if(type=="refresh"){  let get=await fetch("http://localhost:4800/refresh",{credentials:"include",});if(!get.ok){let conv=await get.json();throw new Error(conv.msg||"error in refresh")};return await get.json();    }
 
-else if(type=="order"){ let get=await fetch("http://localhost:4800/publish",{method:"POST",body:JSON.stringify(data),headers:{"content-type":"application/json"},signal});if(!get.ok){let conv=await get.json();throw new Error(conv.msg||"error in order")};return await get.json(); }
+else if(type=="order"){ let get=await fetch("http://localhost:4800/publish",{method:"POST",body:JSON.stringify(data),headers:{"content-type":"application/json"},signal});
+
+;if(!get.ok){let conv=await get.json(); 
+ throw new Error(conv.msg||"error in order")};let conv=await get.json(); 
+ window.location.href=conv.url;
+ return conv  }
 else if (type=="cancel"){console.log(data);let get=await fetch("http://localhost:4800/cancel",{method:"DELETE",headers:{"Content-type":"Application/json"},body:JSON.stringify(data),signal});if(!get.ok){let conv=await get.json();throw new Error(conv||"error in cancelation")
 }
 return await get.json();
@@ -60,10 +65,16 @@ return await get.json();
 else if(type=="acknowledge"){console.log(data,"dd");
   let get=await fetch("http://localhost:4800/acknowledge",{method:"PUT",headers:{"Content-Type":"Application/json"},body:JSON.stringify(data)});
   let conv=await get.json();
-  if(!conv){throw new Error(conv.msg||conv||"error in acknowledge")};
+ 
+  if(!get.ok){throw new Error(conv.msg||conv||"error in acknowledge")};
   return conv;
 }
-
+else if(type=="post_complete"){
+  let get=await fetch(`http://localhost:4800/post_payment`,{method:"POST",headers:{"Content-Type":"Application/json"},body:JSON.stringify(data)});
+  let conv=await get.json();
+  if(!get.ok){throw new Error(conv||conv.msg||"error in post_payment_usePost")};
+  return conv;
+}
  },retry:false,onSuccess:(x)=>{switch(type){
    case "sign" : sign(x.dets);break;
    case "order":
@@ -71,7 +82,8 @@ else if(type=="acknowledge"){console.log(data,"dd");
    case "comment":client.invalidateQueries(["comment"]);break;
    case "acknowledge":client.invalidateQueries(["orders_data"]);
    }
- },onError:(x)=>{
+ },onError:(x)=>{console.log(x);
+ 
  }  })
 
 

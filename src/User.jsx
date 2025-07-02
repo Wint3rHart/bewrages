@@ -44,7 +44,7 @@ let nav=useNavigate();
                  <li className=''> <strong className='text-yellow-700'>Time Of Order : </strong>{x.placementDate}</li>  
                    <li className=''> <strong className='text-yellow-700'>preperation Time : </strong>{x.preperationDate?x.preperationDate:"In Progress"}</li>
                     <li className=''> <strong className='text-yellow-700'>Price : </strong>{x.price}</li>  
-                <button onClick={(e)=>{console.log(x);query.mutate({customer_id:x.customer_id,index:i,order_id:x.order_id})
+                <button onClick={(e)=>{console.log(x);query.mutate({customer_id:x.customer_id,index:i,order_id:x.order_id,payment_id:x.payment_id})
 
 
                 

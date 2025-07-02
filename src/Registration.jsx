@@ -22,7 +22,7 @@ let sign_fnx=useSignStore(state=>state.fnx.set_data);
   },[login.data,login.isError,login.isLoading]);
   
   useEffect(()=>{ if(query.isSuccess){login.refetch();ref.current.style.transform="scaleY(1)";ref.current.innerText="In progress"};if(query.isError){console.log(query.error);ref.current.style.transform="scaleY(1)";ref.current.innerText="Failed,Login Again"} setTimeout(() => {
-  ref.current.style.transform="scaleY(0)";
+  // ref.current.style.transform="scaleY(0)";
 
 }, 1300)
      },[query.isSuccess,,query.error,query.data]);

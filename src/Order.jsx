@@ -70,24 +70,24 @@ else if(!query.isPending&&query.isError){ref.current[1].innerText="Order Failed"
 // useEffect(()=>{console.log(placing);
 // },[placing])
 if (!data?.flavors) 
-return <p>Loading.....</p>  
+return <p className='text-white font-black text-4xl animate-pulse  flex justify-center h-100 items-center  ml-auto  '>Loading.....</p>  
 
 
   return (
     <div className="flex mt-30  bg-transparent relative text-gray-400 items-center  justify-center min-h-screen w-full">
-      <span className='text-gray-100 font-black border-2 hover:border-yellow-700 absolute  hover:pointer absolute top-0 hover:border-white hover:text-white hover:scale-99 cursor-pointer transition-all duration-300 border-white inline-block mb-5 rounded-full p-3' onClick={()=>{nav("/select")}}>Back</span>
+      <span className='text-gray-100 font-black border-2 hover:border-yellow-700 absolute  hover:pointer absolute top-5 hover:border-white hover:text-white hover:scale-99 cursor-pointer transition-all duration-300 border-white inline-block z-1 ml-90 mt-10 rounded-full p-3' onClick={()=>{nav("/select")}}>Back</span>
       <div className={`w-full flex relative transition-all duration-1000 border-white justify-center `}>
         <div className="bg-yellow-900/25 border-3 mt-5  border-white rounded-full p-6 rounded-lg shadow-md w-full max-w-md">
           <h2 className="text-2xl font-bold mb-4 text-white text-center">Order</h2>
           <span>{data.rating}</span>
           {/* <button onClick={()=>{abort_ref.current.abort();abort_ref.current=new AbortController()}}> ABORT</button> */}
           
-          <form  onSubmit={handleSubmit((data)=>{ console.log(data,priceRef.current[1].value);
+          <form  onSubmit={handleSubmit((data)=>{ console.log(data);
           ;query.mutate({order:data.order,bewrage_id:search.get("id"),customer_id:user_id,flavour:data.flavour,quantity:data.quantity,delivery:data.delivery,size:data.size,address:data.address,requests:data.request,price:priceRef.current[1].value}) })}>
 
 
    
- <div className="mb-4">
+ <div className="mb-4 ">
               <label className="block font-semibold mb-1 text-white font-semibold  " ></label>
                <input type='text'  disabled={true} value={data?.name} {...register("order",{required:"Must be mentioned"})} className='font-semibold text-white'/>
              

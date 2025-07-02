@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import useSignStore from './useSignStore';
 import Registration from './Registration';
 import { AnimatePresence } from 'framer-motion';
+import Completed from './Completed';
 
 let Select=lazy(()=>{return import('./App')});
 let Home=lazy(()=>{return import('./Home')});
@@ -55,17 +56,18 @@ const memo=useMemo(()=>{console.log("yyyy");
 <Route path='/order' element={<Order/>} />
 <Route path='/admin/:admin_id' element={<Admin/>}/>
 <Route path='/user/:id'  element={<User/>}/>
-
+<Route path='/completed' element={<Completed/>}/>
 
 </Routes>
 {/* </AnimatePresence> */}
-</Suspense>},);
+</Suspense>},[]);
 
   return (
     <SearchContext.Provider value={{cards_fnx,search}}>
-    <div>
+    <div class="min-h-screen border-5 border-red-900 items-center justify-center bg-[url('/Untitled-1%20copy.jpg')] bg-no-repeat bg-center -z-3 bg-cover bg-fixed">
 
   
+
 <Navbar/>
 
 {memo

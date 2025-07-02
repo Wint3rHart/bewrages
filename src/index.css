@@ -1,7 +1,9 @@
 @import "tailwindcss";
 
-body{  
-  /* background-image: url("/Untitled-1 copy.jpg");background-repeat: no-repeat;background-position:center;background-size: cover;background-attachment: fixed; */
+/* @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap'); */
+
+body{font-family:"cinzel";
+  /* background-image: url("/Untitled-1 copy.jpg");background-repeat: no-repeat;background-position:center;bakcground-size: cover;background-attachment: fixed; */
   background-color: #110700;
 }
 :root {

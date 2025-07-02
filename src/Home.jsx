@@ -2,6 +2,8 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { nav } from 'framer-motion/client';
+import { useNavigate } from 'react-router';
 
 const variants = {
   initial: { opacity: 0, y: -40 },
@@ -59,6 +61,7 @@ let childvariants2 = {
 let text1 = "Find Your Perfect Stay – ";
 
 function Home() {
+  let nav=useNavigate();
   return (
     <>
       <motion.div
@@ -85,10 +88,10 @@ function Home() {
             preload='metadata'
             src="http://localhost:4800/video"
             controls
-            className="absolute -z-1 brightness-50 h-full w-full"
+            className="absolute  brightness-50 h-full w-full"
           ></video>
 
-          <motion.div variants={variants} initial="initial" animate="animate">
+          <motion.div variants={variants} initial="initial" animate="animate" style={{fontFamily:"dm-serif-display"}}>
             <motion.h1
               variants={variants}
               initial="initial"
