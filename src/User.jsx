@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router';
 import useData from './useData';
 import usePost from './usePost'
 function User() {
+console.log("user rendered");
 
   let { id } = useParams();
   let decode = decodeURIComponent(id);
@@ -14,14 +15,13 @@ let nav=useNavigate();
   useEffect(() => {
     console.log(data, error && error);
   }, [data])
-
-  if (isLoading && !data) {
-    return <p className='mt-50 ml-50 font-black text-xl text-gray-100 animate-pulse'>Loading...</p>
-  }
+if (!data) {
+return <p className='text-white font-black text-4xl animate-pulse  flex justify-center h-100 items-center  ml-auto  '>Loading.....</p>  }
+  if(error){return   <p className='text-white font-black text-4xl animate-pulse  flex justify-center h-100 items-center  ml-auto  '>Failed</p> }
 
   return (
 
-    <div className="flex flex-col  mt-30 w-full  transition-all duration-300  hover:border-yellow-900 items-center justify-center p-6 space-y-4 bg-yellow-900/60 border-3 border-white rounded-lg shadow-lg">
+    <div className="flex flex-col  mt-30 w-full  transition-all duration-300  hover:border-yellow-900 items-center justify-center p-6 space-y-4 bg-yellow-900/30 border-3 border-white rounded-lg shadow-lg">
       
       {
         data && (
@@ -39,17 +39,17 @@ let nav=useNavigate();
                   <li className=''> <strong className='text-yellow-700'>Order Id : </strong>{x.order_id}</li> 
                   <li> <strong className='text-yellow-700'>Bewrage Id : </strong>{x.bewrage_id}</li> 
                 <li> <strong className='text-yellow-700'>Order : </strong>{x.order}</li> <li> <strong className='text-yellow-700'>Flavour :  </strong>{x.flavour}</li><li><strong className='text-yellow-700'>Quantity :</strong>  {x.quantity}</li><li> <strong className='text-yellow-700'>Size : </strong>{x.size}</li>  <li><strong className='text-yellow-700'>Requests :</strong> {x.requests?.length > 0 ? x.requests : 'none'}</li>
-                 <li className=''> <strong className='text-yellow-700'>Time Of Order : </strong>{x.placementDate}</li>   
+                 
                 <li className=''> <strong className='text-yellow-700'>Status : </strong>{x.status}</li> 
                  <li className=''> <strong className='text-yellow-700'>Time Of Order : </strong>{x.placementDate}</li>  
                    <li className=''> <strong className='text-yellow-700'>preperation Time : </strong>{x.preperationDate?x.preperationDate:"In Progress"}</li>
                     <li className=''> <strong className='text-yellow-700'>Price : </strong>{x.price}</li>  
-                <button onClick={(e)=>{console.log(x);query.mutate({customer_id:x.customer_id,index:i,order_id:x.order_id,payment_id:x.payment_id})
+               {!query.isPending ?<button onClick={(e)=>{console.log(x);query.mutate({customer_id:x.customer_id,index:i,order_id:x.order_id,payment_id:x.payment_id})
 
 
                 
                 
-                }} className='border-2 border-white hover:border-gray-100 hover:scale-99 hover:text-yellow-800 transition-all duration-300 text-sm bg-transparent p-2 rounded-xl mt-3 cursor-pointer'>{x.status=="Pending"?"Cancel":"Collect"}</button> </ul> }) : <p className='text-gray-100'>No Bookings</p>}</ul>
+                }} className='border-2 border-white hover:border-gray-100 hover:scale-99 hover:text-yellow-800 transition-all duration-300 text-sm bg-transparent p-2 rounded-xl mt-3 cursor-pointer'>{x.status=="Pending"?"Cancel":"Collect"}</button>:"Canceling" }</ul> }) : <p className='text-gray-100'>No Bookings</p>}</ul>
 
             </div>
           </div>

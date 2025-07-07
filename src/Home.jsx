@@ -58,7 +58,7 @@ let childvariants2 = {
   },
 };
 
-let text1 = "Find Your Perfect Stay – ";
+let text1 = "Order Your Favorite Drink – ";
 
 function Home() {
   let nav=useNavigate();
@@ -69,11 +69,11 @@ function Home() {
         initial="initial"
         animate="animate"
         exit="exit"
-        className="flex flex-col w-full text-gray-800 p-6"
+        className="flex flex-col w-full text-gray-800 px-10"
       >
         <motion.header
           variants={childvariants}
-          className="bg-transparent relative hover:bg-yellow-700/7 border-2 border-yellow-700/7 sm:mt-20 sm:w-[90%] m-auto flex flex-col items-center justify-center text-white text-center sm:h-150 py-16 rounded-lg transition-all duration-200"
+          className="bg-transparent relative hover:bg-yellow-700/7 border-2 border-yellow-700/7 sm:mt-20 sm:w-[90%] m-auto flex flex-col items-center justify-center text-white text-center sm:h-150 p-16 rounded-lg transition-all duration-200"
           style={{
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
@@ -87,8 +87,8 @@ function Home() {
             playsInline
             preload='metadata'
             src="http://localhost:4800/video"
-            controls
-            className="absolute  brightness-50 h-full w-full"
+            
+            className="absolute rounded-lg brightness-40 h-full w-full"
           ></video>
 
           <motion.div variants={variants} initial="initial" animate="animate" style={{fontFamily:"dm-serif-display"}}>
@@ -106,15 +106,15 @@ function Home() {
 
               <motion.strong
                 variants={childvariants}
-                className="text-yellow-800 block"
+                className="text-yellow-600 block"
               >
-                Book with Ease
+              Sip happiness today
               </motion.strong>
               <motion.p
                 variants={childvariants3}
-                className="sm:text-xl absolute sm:top-16 sm:left-55 text-yellow-800 font-semibold text-xl mb-6"
+                className="sm:text-xl absolute p-2 rounded-lg  sm:top-20 sm:left-70 bg-yellow-700/50 text-white font-semibold text-xl mb-6"
               >
-                Discover top-rated hotels at unbeatable prices.
+               Refreshing beverages, just a click away
               </motion.p>
             </motion.h1>
           </motion.div>
@@ -180,7 +180,7 @@ function Home() {
           whileInView="whileInView"
           viewport={{ amount: 0.9 }}
           id="contact"
-          className="my-12 bg-transparent text-gray-500 border-1 border-[rgba(70,10,144,1)] p-8 w-full mt-50 sm:w-1/2 m-auto flex flex-col items-center rounded-lg shadow"
+          className="my-12 bg-transparent text-gray-500 border-1 border-[rgb(144, 55, 10)] p-8 w-full mt-50 sm:w-1/2 m-auto flex flex-col items-center rounded-lg shadow"
         >
           <motion.h2
             variants={childvariants2}
@@ -188,7 +188,7 @@ function Home() {
           >
             Contact Us
           </motion.h2>
-          <motion.div variants={childvariants2} className="sm:text-left">
+          <motion.div variants={childvariants2} className="sm:text-center">
             <p className="font-semibold text-gray-300">
               <strong className="text-yellow-700">Phone:</strong> +123-456-7890
             </p>

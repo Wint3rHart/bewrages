@@ -36,10 +36,10 @@ setSearch((a)=>{return a=x });
 
 
 
-useEffect(()=>{
-  if(search.length>1){nav("/cards?category=custom")}
+// useEffect(()=>{
+//   if(search.length>1){nav("/cards?category=custom")}else {nav("/cards?category=All")}
   
-},[search]);
+// },[search]);
 
 
   
@@ -64,17 +64,25 @@ const memo=useMemo(()=>{console.log("yyyy");
 
   return (
     <SearchContext.Provider value={{cards_fnx,search}}>
-    <div class="min-h-screen border-5 border-red-900 items-center justify-center bg-[url('/Untitled-1%20copy.jpg')] bg-no-repeat bg-center -z-3 bg-cover bg-fixed">
+<div class="relative min-h-screen border-5 border-yellow-900/50 bg-[url('/Untitled-1.jpg')] bg-no-repeat bg-center bg-cover bg-fixed ">
 
-  
+  {/* Blurred dark overlay to improve contrast */}
+  <div class="absolute inset-0 bg-black/40 backdrop-blur-xs z-0"></div>
 
-<Navbar/>
+  {/* Navbar should be above the blur layer */}
+  <div class="relative z-10 w-full">
+    <Navbar />
+  </div>
 
-{memo
-  }
 
-        
-    </div>
+
+  {/* Your memo content, still on top */}
+  <div class="relative z-10">
+    {memo}
+  </div>
+
+</div>
+
     </SearchContext.Provider>
   )
 }

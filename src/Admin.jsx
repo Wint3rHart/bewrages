@@ -16,7 +16,7 @@ useEffect(()=>{console.log(data);
 let nav=useNavigate();
   return (
 
-    <div className='flex flex-col justify-center bg-yellow-900/50 border-2 p-3 border-white items-center mt-25'>
+    <div className='flex flex-col  mt-30 w-full  transition-all duration-300  hover:border-yellow-900 items-center justify-center p-6 space-y-4 bg-yellow-900/30 border-3 border-white rounded-lg shadow-lg'>
 
  <span className='text-gray-300 border-1 hover:border-white  hover:text-white hover:scale-99 cursor-pointer transition-all duration-300 border-white inline-block rounded-full p-2' onClick={() => { nav('/select') }}>Back</span>
             {/* <img className='rounded-full w-50 m-auto border-2 h-50 border-purple-500' src={`data:image/webp;base64,${profilePic}`} /> */}

@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router';
 
 function Sign() {
   const [reg, setReg] = useState(true);
+console.log("sign rendered");
 
   const {
     register,
@@ -57,14 +58,14 @@ function Sign() {
   }, [isPending, isSuccess, error]);
 
   return (
-    <div className="flex justify-center items-center h-250 text-[#D3D3D3] p-6">
+    <div className="flex justify-center items-center h-250 text-[#D3D3D3] p-6 relative">
       <section className="shadow-2xl rounded-2xl p-8 w-full bg-gray-900/50 max-w-md border border-[#A9A9A9] text-[#D3D3D3]">
         <h1 className="text-xl font-bold w-50 m-auto mb-10 text-center">
           {reg ? 'User SignUp' : 'User Login'}
         </h1>
 
         <span
-          className="text-gray-100 absolute top-75 m-auto cursor-pointer border border-yellow-700 inline-block rounded-full p-3 hover:text-white hover:border-white transition-all"
+          className={`text-gray-100 absolute ${reg?"top-40":"top-60"}  m-auto cursor-pointer border border-grey-700 inline-block rounded-full p-3 hover:text-white hover:border-white transition-all`}
           onClick={() => {
             nav('/select');
           }}
@@ -72,7 +73,7 @@ function Sign() {
           Back
         </span>
 
-        <div className="flex items-center justify-center mb-6">
+        <div className="flex items-center justify-evenly mb-2">
           <button
             onClick={() => setReg(false)}
             className={`w-1/3 pb-4 font-medium text-center cursor-pointer transition border-b-2 ${
@@ -214,7 +215,7 @@ function Sign() {
               Submit
             </button>
           </div>
-          <p className="text-white mt-2">{isError && error?.message}</p>
+          <p className="text-white mt-2">{isError && "Failed"}</p>
         </form>
 
         <DevTool control={control} />

@@ -71,9 +71,8 @@ console.log("app rendered");
     console.log(isError && error.message);
   }, [data, error]);
 
-  if (isLoading) {
-    return <div><p>LOADING...</p></div>;
-  }
+if (!data) {
+return <p className='text-white font-black text-4xl animate-pulse  flex justify-center h-100 items-center  ml-auto  '>Loading.....</p>  }
 
   return (
     <div className="h-screen mt-20 flex flex-col justify-center items-center"  
@@ -103,7 +102,7 @@ console.log("app rendered");
             <motion.li
               key="all"
               variants={childVar}
-              className="bg-amber-900/25 mt-5  border-2 border-white hover:border-gray-300 hover:scale-98 px-4 py-2 w-50 text-center rounded-full transition-all duration-300 border-gray-400 cursor-pointer"
+              className="bg-amber-900/25 mt-5  border-1 border-white hover:border-gray-300 hover:scale-98 px-4 py-2 w-50 text-center rounded-full transition-all duration-300 border-gray-400 cursor-pointer"
               onClick={() => nav(`/cards?category=All`)}
             >
               All
@@ -113,7 +112,7 @@ console.log("app rendered");
               <motion.li
                 key={x._id}
                 variants={childVar}
-                className="bg-amber-900/25 mt-5 border-2 border-white hover:border-gray-300  hover:scale-98 transition-all duration-300 px-4 py-2 w-50 text-center rounded-full border-gray-400 cursor-pointer"
+                className="bg-amber-900/25 mt-5 border-1 border-white hover:border-gray-300  hover:scale-98 transition-all duration-300 px-4 py-2 w-50 text-center rounded-full border-gray-400 cursor-pointer"
                 onClick={() => nav(`/cards?category=${x._id}`)}
               >
                 {x._id}

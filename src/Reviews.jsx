@@ -1,6 +1,6 @@
 import React, { act, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import useData from './useData';
-import { useSearchParams } from 'react-router';
+import { useNavigate, useSearchParams } from 'react-router';
 import usePost from './usePost';
 import useSignStore from './useSignStore';
 import { useInfiniteQuery } from '@tanstack/react-query';
@@ -17,7 +17,7 @@ function Reviews() {
 
 
 let [state,setState]=useState(0);
-
+let nav=useNavigate();
   console.log("modal rendered");
 
 
@@ -83,13 +83,13 @@ return  data && (
     
     <h3>{data.pages[0].details.rating}</h3>
 
-    <div className='border-4 border-red-900/25   max-h-60 overflow-y-scroll overflow-x-hidden'>
+    <div className='border-4 border-yellow-900/80 p-3 rounded-lg  max-h-60 overflow-y-scroll overflow-x-hidden'>
       {
         data?.pages.map((a)=>{return a.reviews?.map((x, i) => (
         <div key={i} className='flex flex-col text-white mt-10'>
-          <p>{x.user}</p>
+          <p className='text-yellow-800'>{x.user}</p>
           <p>{x.rating}</p>
-          <div className='border-2 max-w-130 h-1/2'>
+          <div className='border-1 p-1 rounded-lg max-w-130 h-1/2'>
             <p className={`${reducer.read_val === i ? '' : 'truncate'} w-69`}>
               {x.comment}
             </p>
@@ -134,23 +134,17 @@ else if(query.error){ref.current.innerText=query.error;setTimeout(() => {
 },[query.isPaused,query.isPending,query.error]);
 
 
-
-  if (!data || isLoading) {
-    return (
-      <div className='text-white font-black text-4xl animate-pulse'>
-        LOADING
-      </div>
-    );
-  }
+if (!data||isLoading) {
+return <p className='text-white font-black text-4xl animate-pulse  flex justify-center h-100 items-center  ml-auto  '>Loading.....</p>  }
 
   return (
-    <div className='text-white font-black flex justify-center text-center relative'>
-
+    <div className='text-white font-black relative flex justify-center text-center relative'>
+<button className='absolute top-10 ml-70 ' onClick={()=>{nav("/select")}}>Back</button>
       {memo}
 
       <div
         className={`absolute mt-25 flex flex-col justify-around items-center top-0
-        border-3 border-blue-500 h-[500px] w-[400px]
+        border-1 rounded-lg border-grey-500 h-[500px] w-[400px]
         ${search.get("type") === "comment" ? 'rotate-y-0 opacity-100' : 'rotate-y-180 opacity-0'}
         transition-all duration-500`}
       >

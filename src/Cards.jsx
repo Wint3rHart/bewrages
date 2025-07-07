@@ -15,6 +15,7 @@ import {
 import { Blurhash } from "react-blurhash";
 import { SearchContext } from "./MainRoutes";
 import { motion, AnimatePresence } from "framer-motion";
+import UseGeneralStore from "./useGeneralStore";
 
 
 const red_fnx = (state, action) => {
@@ -63,20 +64,24 @@ const childVar = {
 
 function Cards() {
   let context = useContext(SearchContext);
-  let loc = useLocation();console.log("cards rendered");
+  let loc = useLocation();
+  let search_state=UseGeneralStore((state)=>{return state.data.search});
+  console.log("cards rendered");
   let [search, setSearch] = useSearchParams();
   let { data, isLoading, error, isError ,isPending} = useData(
     search.get("category") !== "custom"
       ? search.get("category")
       : "search",
-    search.get("category") !== "custom" ? "drinks" : context.search
+    search.get("category") !== "custom" ? "drinks" : search_state
   );
 
   let [rotate, setRotate] = useState(null);
   let [reducer, setReducer] = useReducer(red_fnx, {});
+
   let nav = useNavigate();
 useEffect(()=>{console.log(data);
 },[data])
+
   useEffect(() => {
     data &&
       data.forEach((x) => {
@@ -87,14 +92,14 @@ useEffect(()=>{console.log(data);
         };
       });
   }, [data]);
-// if(isLoading){
-// ;return <p className="font-black animate-pulse text-red-900">Loading</p>}
+
+
+
   const memo = useMemo(() => {
-    return (
-      data &&
-   <motion.div variants={parentVar} initial="initial" animate="animate" exit="exit" className="flex flex-wrap justify-evenly">{data.map((x, i) =>  {return <motion.div key={i} variants={childVar}  className="relative">
+    if(!data||isPending){return null}
+    return  <motion.div variants={parentVar} initial="initial" animate="animate" exit="exit" className="flex flex-wrap justify-evenly">{data.map((x, i) =>  {return <motion.div key={i} variants={childVar}  className="relative">
           {/* Front Side */}
-         ( <div
+          <div
             className={`${
               rotate === i ? "-scale-x-100 opacity-0" : "scale-x-100 opacity-100"
             } flex flex-col border-2 border-white hover:border-gray-300 rounded-lg overflow-hidden shadow-lg transition-all duration-1000 group w-[400px] h-[500px] bg-black/50 backdrop-blur-xs ml-3 mt-3`}
@@ -155,15 +160,15 @@ useEffect(()=>{console.log(data);
 
             {/* Border Accent */}
             <div className="border-t-2 border-white w-0 transition-all duration-500 group-hover:w-2/3 mx-auto mt-2"></div>
-          </div>)
+          </div>
 
           {/* Back Side */}
-      (    <div
+        <div
             className={`${
               rotate === i
                 ? "scale-x-100 opacity-100 z-10"
                 : "-scale-x-100 opacity-0 -z-10"
-            } absolute top-9 flex flex-col border-2 border-white hover:border-gray-300 rounded-lg overflow-hidden shadow-lg transition-all duration-1000 w-[400px] h-[500px] bg-black/70 backdrop-blur-sm`}
+            } absolute top-3 flex flex-col border-2 border-white hover:border-gray-300 rounded-lg overflow-hidden shadow-lg transition-all duration-1000 w-[400px] h-[500px] bg-black/70 backdrop-blur-sm`}
           >
             <button
               onClick={() => setRotate(null)}
@@ -195,12 +200,13 @@ useEffect(()=>{console.log(data);
                 </li>
               ))}
             </ul>
-          </div>)
+          </div>
         </motion.div>
       })}</motion.div>   
-    );
-  }, [data, rotate, reducer]);
-
+    ;
+  }, [data, rotate, reducer,context]);
+if (!data||isPending) {
+return <p className='text-white font-black text-4xl animate-pulse  flex justify-center h-100 items-center  ml-auto  '>Loading.....</p>  }
   return (
     <div className="flex flex-wrap justify-center gap-6 min-h-[900px] w-screen items-center p-8">
       {memo}

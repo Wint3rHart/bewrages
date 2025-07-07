@@ -126,17 +126,17 @@ return <p className='text-white font-black text-4xl animate-pulse  flex justify-
               <select  {...register("delivery",{onChange:(e)=>{setReducer({type:"delivery",payload:e.target.value})}})} ref={(e)=>{ref.current[0]=e;register("delivery").ref(e)}} className='border-1 border-white text-white rounded-full p-1 '>
               
              <option>Pickup </option>
-             <option>Standard Delivery </option>
+             {/* <option>Standard Delivery </option> */}
             
               </select>
               
             </div>
             
-           {ref.current?.[0]?.value=="Standard Delivery"&& <div className="mb-4">
+           {/* {ref.current?.[0]?.value=="Standard Delivery"&& <div className="mb-4">
               <label className="block font-semibold mb-1 text-white font-semibold  " >Address</label>
                <input type='text' {...register("address",{required:"Must be mentioned"})} className='text-black font-semibold'/>
              
-            </div>}
+            </div>} */}
             
           
             <div className="mb-4 ">
